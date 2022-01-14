@@ -23,7 +23,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', index, name='index'),
     # 配置媒体文件的路由地址
     re_path('media/(?P<path>.*)', serve,
             {'document_root': settings.MEDIA_ROOT}, name='media'),
