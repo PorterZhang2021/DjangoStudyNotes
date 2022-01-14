@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# 项目路径
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -20,22 +21,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# 密钥配置
 SECRET_KEY = 'django-insecure-nn++i)re32f#s%l805x38!f32am3e-12s3%x0ez%6buo*%v9jt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# 调试模式
 DEBUG = True
 
+# 域名访问权限
 ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# App列表
 INSTALLED_APPS = [
+    # 内置的后台管理系统
     'django.contrib.admin',
+    # 内置的用户认证系统
     'django.contrib.auth',
+    # 记录项目中所有model元数据（Django的ORM框架）
     'django.contrib.contenttypes',
+    # Session会话功能，用于标识当前访问网站的用户身份、记录相关用户信息
     'django.contrib.sessions',
+    # 消息提示功能
     'django.contrib.messages',
+    # 查找静态资源路径
     'django.contrib.staticfiles',
     # 添加项目应用index
     'index',
