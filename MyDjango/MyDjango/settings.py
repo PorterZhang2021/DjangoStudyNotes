@@ -64,7 +64,9 @@ ROOT_URLCONF = 'MyDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        # 注册根目录和index的templates文件夹
+        'DIRS': [BASE_DIR / 'templates',
+                 BASE_DIR / 'index/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
