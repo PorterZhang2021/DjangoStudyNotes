@@ -13,17 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# 导入内置Admin功能模块
 from django.contrib import admin
-from django.urls import path, re_path
-# 导入项目应用index
-from index.views import index
+# 导入Django的路由函数模块
+from django.urls import path, re_path, include
+
+# [1] 导入项目应用index
+# [1] from index.views import index
 # 配置媒体文件夹media
 from django.views.static import serve
 from django.conf import settings
 
+# urlpatterns整个项目的路由集合，以列表格式表示，每个元素代表一条路由信息
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', include('index.urls')),
+    # [1] path('', index, name='index'),
+    # include index app下的路由
     # 配置媒体文件的路由地址
     re_path('media/(?P<path>.*)', serve,
             {'document_root': settings.MEDIA_ROOT}, name='media'),
