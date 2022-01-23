@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 添加项目应用index
     'index',
+    # 添加项目应用user
+    'user',
 ]
 
 # 中间件

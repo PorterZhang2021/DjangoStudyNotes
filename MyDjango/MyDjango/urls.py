@@ -27,7 +27,10 @@ from django.conf import settings
 # urlpatterns整个项目的路由集合，以列表格式表示，每个元素代表一条路由信息
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('index.urls')),
+    # 指向index的路由文件urls.py
+    path('', include(('index.urls', 'index'), namespace='index')),
+    # 指向user的路由文件urls.py
+    path('user/', include(('user.urls', 'user'), namespace='user')),
     # [1] path('', index, name='index'),
     # include index app下的路由
     # 配置媒体文件的路由地址
