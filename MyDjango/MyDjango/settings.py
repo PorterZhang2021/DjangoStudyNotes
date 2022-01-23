@@ -49,13 +49,23 @@ INSTALLED_APPS = [
     'index',
 ]
 
+# 中间件
 MIDDLEWARE = [
+    # 内置的安全机制，保护用户与网站的通信安全
     'django.middleware.security.SecurityMiddleware',
+    # 会话Session功能
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 添加中间件 国际化与本地化功能
+    'django.middleware.locale.LocaleMiddleware',
+    # 处理请求信息，规范化请求内容
     'django.middleware.common.CommonMiddleware',
+    # 开启CSRF防护功能
     'django.middleware.csrf.CsrfViewMiddleware',
+    # 开启内置的用户认证系统
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 开启内置的信息提示功能
     'django.contrib.messages.middleware.MessageMiddleware',
+    # 防止恶意程序单击劫持
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
