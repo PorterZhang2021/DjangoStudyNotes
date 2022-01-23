@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    re_path('(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2}).html', views.myDate)
+    re_path('(?P<year>[0-9]{4}).html', views.mydate, name='mydate')
+    path('', views.index, name='index')
 ]
