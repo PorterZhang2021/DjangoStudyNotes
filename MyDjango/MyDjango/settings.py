@@ -47,8 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 添加项目应用index
     'index',
-    # 添加项目应用user
-    'user',
 ]
 
 # 中间件
@@ -152,7 +150,4 @@ STATICFILES_DIRS = [BASE_DIR / 'static',
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 设置媒体路由地址信息
-MEDIA_URL = '/media/'
-# 获取media文件夹的完整信息
-MEDIA_ROOT = BASE_DIR / 'media'
+

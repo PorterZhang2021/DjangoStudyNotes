@@ -18,22 +18,9 @@ from django.contrib import admin
 # 导入Django的路由函数模块
 from django.urls import path, re_path, include
 
-# [1] 导入项目应用index
-# [1] from index.views import index
-# 配置媒体文件夹media
-from django.views.static import serve
-from django.conf import settings
-
 # urlpatterns整个项目的路由集合，以列表格式表示，每个元素代表一条路由信息
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 指向index的路由文件urls.py
-    path('', include(('index.urls', 'index'), namespace='index')),
-    # 指向user的路由文件urls.py
-    path('user/', include(('user.urls', 'user'), namespace='user')),
-    # [1] path('', index, name='index'),
-    # include index app下的路由
-    # 配置媒体文件的路由地址
-    re_path('media/(?P<path>.*)', serve,
-            {'document_root': settings.MEDIA_ROOT}, name='media'),
+    path('', include('index.urls')),
 ]

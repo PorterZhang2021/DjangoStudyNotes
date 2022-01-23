@@ -4,6 +4,8 @@ from . import views
 
 
 urlpatterns = [
-    re_path('(?P<year>[0-9]{4}).html', views.mydate, name='mydate')
-    path('', views.index, name='index')
+    # 添加带有字符类型、整型和slug的路由
+    path('<year>/<int:month>/<slug:day>', views.mydate, name='mydate'),
+    # 定义首页的路由
+    path('', views.index)
 ]

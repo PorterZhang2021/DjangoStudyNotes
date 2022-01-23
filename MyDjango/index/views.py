@@ -3,8 +3,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def mydate(request, year):
-    return HttpResponse(str(year))
+def mydate(request, year, month, day):
+    return HttpResponse(str(year)+'/'+str(month)+'/'+str(day))
 
 
 def index(request):
