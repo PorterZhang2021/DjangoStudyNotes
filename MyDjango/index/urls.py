@@ -1,10 +1,8 @@
 # index的urls.py设置
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
+
 urlpatterns = [
-    # 添加带有字符类型、整型和slug的路由
-    path('<year>/<int:month>/<slug:day>', views.myVariable),
-    # 添加路由地址外的变量month
-    path('', views.index, {'month': '2019/10/10'}),
+    re_path('(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2}).html', views.myDate)
 ]
