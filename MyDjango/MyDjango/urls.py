@@ -18,9 +18,16 @@ from django.contrib import admin
 # 导入Django的路由函数模块
 from django.urls import path, re_path, include
 
+
 # urlpatterns整个项目的路由集合，以列表格式表示，每个元素代表一条路由信息
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 使用命名空间namespace
     path('', include(('index.urls', 'index'), namespace='index')),
 ]
+
+# 全局404页面配置
+handler404 = 'index.views.page_not_found'
+
+# 全局500页面配置
+handler500 = 'index.views.page_error'

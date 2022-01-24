@@ -1,18 +1,20 @@
-from django.http import HttpResponseRedirect
-from django.http import HttpResponsePermanentRedirect
-from django.shortcuts import reverse
-from django.shortcuts import render, redirect
-# Create your views here.
+from django.shortcuts import render
+from django.http import Http404
+
+
+def page_not_found(request, exception):
+    """全局404的配置函数"""
+    return render(request, '404.html', status=404)
+
+
+def page_error(request):
+    """全局500的配置函数"""
+    return render(request, '500.html', status=500)
 
 
 def index(request):
-    return redirect('index:shop', permanent=True)
-    # 设置302的重定向
-    url = reverse('index:shop')
-    # return HttpResponseRedirect(url)
-    # 设置301的重定向
-    # return HttpResponsePermanentRedirect(url)
-
-
-def shop(request):
-    return render(request, 'index.html')
+    # request.GET是获取请求
+    if request.GET.get('error', ''):
+        raise Http404("page does not exist")
+    else:
+        return render(request, 'index.html')
