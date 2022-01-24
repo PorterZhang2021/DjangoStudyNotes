@@ -4,5 +4,6 @@ from django.http import HttpResponse
 
 
 def index(request):
-    value = {'title' : 'Hello MyDjango'}
-    return render(request, 'index.html', context=value)
+    title = {'key': 'Hello MyDjango'}
+    content = {'key': 'This is MyDjango'}
+    return render(request, 'index.html', locals())
