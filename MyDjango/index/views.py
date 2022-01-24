@@ -1,20 +1,40 @@
 from django.shortcuts import render
-from django.http import Http404
-
-
-def page_not_found(request, exception):
-    """全局404的配置函数"""
-    return render(request, '404.html', status=404)
-
-
-def page_error(request):
-    """全局500的配置函数"""
-    return render(request, '500.html', status=500)
+from django.http import Http404, HttpResponse
+from django.http import StreamingHttpResponse
+from django.http import FileResponse
 
 
 def index(request):
-    # request.GET是获取请求
-    if request.GET.get('error', ''):
-        raise Http404("page does not exist")
-    else:
-        return render(request, 'index.html')
+    return render(request, 'index.html')
+
+
+def download1(request):
+    file_path = 'D:\monkey.jpg'
+    try:
+        r = HttpResponse(open(file_path), 'rb')
+        r['content_type'] = 'application/octet-stream'
+        r['Content-Disposition'] = 'attachment;filename=cat.jpg'
+        return r
+    except Exception:
+        raise Http404('Download error')
+
+
+def download2(request):
+    file_path = 'D:\duck.jpg'
+    try:
+        r = StreamingHttpResponse(open(file_path), 'rb')
+        r['content_type'] = 'application/octet-stream'
+        r['Content-Disposition'] = 'attachment;filename=duck.jpg'
+        return r
+    except Exception:
+        raise Http404('Download error')
+
+
+def download3(request):
+    file_path = 'D:\dog.jpg'
+    try:
+        f = open(file_path, 'rb')
+        r = FileResponse(f, as_attachment=True, filename='dog.jpg')
+        return r
+    except Exception:
+        raise Http404('Download error')

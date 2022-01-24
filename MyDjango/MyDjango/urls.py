@@ -26,8 +26,3 @@ urlpatterns = [
     path('', include(('index.urls', 'index'), namespace='index')),
 ]
 
-# 全局404页面配置
-handler404 = 'index.views.page_not_found'
-
-# 全局500页面配置
-handler500 = 'index.views.page_error'
