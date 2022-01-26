@@ -151,15 +151,3 @@ STATICFILES_DIRS = [BASE_DIR / 'static',
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# 配置文件数据的临时存放文件夹
-# 建立对应文件夹否则报错
-FILE_UPLOAD_TEMP_DIR = "D:\\temp"
-# 判断文件大小的条件
-FILE_UPLOAD_MAX_MEMORY_SIZE = 209715200
-# 设置文件上传的处理过程
-FILE_UPLOAD_HANDLERS = ['MyDjango.handler.MyFileUploadHandler']
-# 默认配置，以列表或元组的形式表示
-# FILE_UPLOAD_HANDLERS = (
-#     "django.core.files.uploadhandler.MemoryFileUploadHandler",
-#     "django.core.files.uploadhandler.TemporaryFileUploadHandler"
-# )

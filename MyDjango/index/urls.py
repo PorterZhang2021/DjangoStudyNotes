@@ -6,5 +6,7 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     # 定义路由
-    path('', views.upload, name='uploaded'),
+    path('', views.index, name='index'),
+    path('create', views.create, name='create'),
+    path('myCookie', views.myCookie, name='myCookie'),
 ]

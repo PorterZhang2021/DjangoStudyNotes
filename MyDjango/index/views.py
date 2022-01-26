@@ -1,26 +1,35 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-import os
+from django.http import Http404, HttpResponse, response
+from django.shortcuts import render, redirect
+from django.shortcuts import reverse
 
 
-def upload(request):
-    # 请求方法为POST时，执行文件上传
-    if request.method == "POST":
-        # 获取上传的文件，如果没有文件，就默认为None
-        myFile = request.FILES.get("myfile", None)
-        if not myFile:
-            return HttpResponse("no files for upload!")
-        # 打开特定的文件进行二进制的写操作
-        # 建立对应的文件夹 否则报错
-        f = open(os.path.join("D:\\upload", myFile.name), 'wb+')
-        # 分块写入文件
-        for chunk in myFile.chunks():
-            f.write(chunk)
-        f.close()
-        return HttpResponse("upload over!")
+def index(request):
+    return render(request, 'index.html')
+
+
+def create(request):
+    r = redirect(reverse('index:index'))
+    # 添加Cookie
+    # response.set_cookie('uid', 'Cookie_Value')
+    # 设置Cookie的有效时间为10秒
+    r.set_signed_cookie('uuid', 'id', salt='MyDj', max_age=10)
+    return r
+
+
+def myCookie(request):
+    cookieExist = request.COOKIES.get('uuid', '')
+    if cookieExist:
+        # 验证加密后的Cookie是否有效
+        try:
+            request.get_signed_cookie('uuid', salt='MyDj')
+        except:
+            raise Http404('当前Cookie无效哦！')
+        return  HttpResponse('当前Cookie为:'+cookieExist)
     else:
-        # 请求方法为GET时，生成文件上传页面
-        return render(request, 'upload.html')
+        raise Http404('当前访问没有Cookie哦！')
+
+
+
 
 
 
