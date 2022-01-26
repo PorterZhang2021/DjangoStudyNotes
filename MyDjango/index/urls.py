@@ -5,6 +5,6 @@ from django.views.generic import RedirectView
 
 
 urlpatterns = [
-    # 定义首页的路由
-    path('', views.index, name='index'),
+    # 定义路由
+    path('', views.upload, name='uploaded'),
 ]

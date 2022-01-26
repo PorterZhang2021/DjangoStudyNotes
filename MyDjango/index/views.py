@@ -1,27 +1,26 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+import os
 
 
-def index(request):
-    # 使用method属性判断请求方式
-    if request.method == 'GET':
-        # 类方法的使用
-        print(request.is_secure())
-        print(request.is_ajax())
-        print(request.get_host())
-        print(request.get_full_path())
-        print(request.get_raw_uri())
-        # 属性的使用
-        print(request.COOKIES)
-        print(request.content_type)
-        print(request.content_params)
-        print(request.scheme)
-        # 获取GET请求的请求参数
-        print(request.GET.get('user', ''))
-        return render(request, 'index.html')
-    elif request.method == 'POST':
-        # 获取POST请求的请求参数
-        print(request.POST.get('user', ''))
-        return render(request, 'index.html')
+def upload(request):
+    # 请求方法为POST时，执行文件上传
+    if request.method == "POST":
+        # 获取上传的文件，如果没有文件，就默认为None
+        myFile = request.FILES.get("myfile", None)
+        if not myFile:
+            return HttpResponse("no files for upload!")
+        # 打开特定的文件进行二进制的写操作
+        # 建立对应的文件夹 否则报错
+        f = open(os.path.join("D:\\upload", myFile.name), 'wb+')
+        # 分块写入文件
+        for chunk in myFile.chunks():
+            f.write(chunk)
+        f.close()
+        return HttpResponse("upload over!")
+    else:
+        # 请求方法为GET时，生成文件上传页面
+        return render(request, 'upload.html')
 
 
 
