@@ -1,40 +1,27 @@
 from django.shortcuts import render
-from django.http import Http404, HttpResponse
-from django.http import StreamingHttpResponse
-from django.http import FileResponse
 
 
 def index(request):
-    return render(request, 'index.html')
+    # 使用method属性判断请求方式
+    if request.method == 'GET':
+        # 类方法的使用
+        print(request.is_secure())
+        print(request.is_ajax())
+        print(request.get_host())
+        print(request.get_full_path())
+        print(request.get_raw_uri())
+        # 属性的使用
+        print(request.COOKIES)
+        print(request.content_type)
+        print(request.content_params)
+        print(request.scheme)
+        # 获取GET请求的请求参数
+        print(request.GET.get('user', ''))
+        return render(request, 'index.html')
+    elif request.method == 'POST':
+        # 获取POST请求的请求参数
+        print(request.POST.get('user', ''))
+        return render(request, 'index.html')
 
 
-def download1(request):
-    file_path = 'D:\monkey.jpg'
-    try:
-        r = HttpResponse(open(file_path), 'rb')
-        r['content_type'] = 'application/octet-stream'
-        r['Content-Disposition'] = 'attachment;filename=cat.jpg'
-        return r
-    except Exception:
-        raise Http404('Download error')
 
-
-def download2(request):
-    file_path = 'D:\duck.jpg'
-    try:
-        r = StreamingHttpResponse(open(file_path), 'rb')
-        r['content_type'] = 'application/octet-stream'
-        r['Content-Disposition'] = 'attachment;filename=duck.jpg'
-        return r
-    except Exception:
-        raise Http404('Download error')
-
-
-def download3(request):
-    file_path = 'D:\dog.jpg'
-    try:
-        f = open(file_path, 'rb')
-        r = FileResponse(f, as_attachment=True, filename='dog.jpg')
-        return r
-    except Exception:
-        raise Http404('Download error')
