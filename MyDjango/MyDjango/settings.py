@@ -151,3 +151,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static',
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# 默认的Cookie加密(解密）引擎
+# SIGNING_BACKEND = 'django.core.signing.TimestampSigner'
+# 自定义Cookie加密(解密)引擎
+SIGNING_BACKEND = 'MyDjango.mySigner.myTimestampSigner'
