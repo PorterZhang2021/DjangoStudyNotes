@@ -1,3 +1,20 @@
+{% load static %}
+<script src="{% static 'jquery.js' %}"></script>
+<script>
+    $(function(){
+        let value = $.ajax({
+            type: "GET",
+            url: "/getHeader",
+            dataType: 'json',
+            async: false,
+            headers: {
+                "sign":"123",
+            }
+        }).responseJSON;
+        value = '<h2>' + value["header"] + '</h2>';
+        $("#myDiv").html(value);
+    })
+</script>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,11 +22,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello World</title>
+    <title>Document</title>
 </head>
 <body>
-    <h3>Hello World</h3>
-    <a href="{% url 'index:create' %}">创建</a>
-    <a href="{% url 'index:myCookie' %}">查看Cookie</a>
+    <h3>Hello Headers</h3>
+    <div id="myDiv"><h2>Ajax获取请求头</h2></div>
+    <button id="btn01" type="button">改变内容</button>
 </body>
 </html>

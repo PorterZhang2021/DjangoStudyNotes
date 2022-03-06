@@ -1,32 +1,21 @@
-from django.http import Http404, HttpResponse, response
-from django.shortcuts import render, redirect
-from django.shortcuts import reverse
+from django.shortcuts import render
+from django.http import JsonResponse
 
 
 def index(request):
     return render(request, 'index.html')
 
 
-def create(request):
-    r = redirect(reverse('index:index'))
-    # 添加Cookie
-    # response.set_cookie('uid', 'Cookie_Value')
-    # 设置Cookie的有效时间为10秒
-    r.set_signed_cookie('uuid', 'id', salt='MyDj', max_age=10)
-    return r
-
-
-def myCookie(request):
-    cookieExist = request.COOKIES.get('uuid', '')
-    if cookieExist:
-        # 验证加密后的Cookie是否有效
-        try:
-            request.get_signed_cookie('uuid', salt='MyDj')
-        except:
-            raise Http404('当前Cookie无效哦！')
-        return  HttpResponse('当前Cookie为:'+cookieExist)
+# API接口判断请求头
+def getHeader(request):
+    header = request.META.get('HTTP_SIGN', '')
+    if header:
+        value = {'header': header}
     else:
-        raise Http404('当前访问没有Cookie哦！')
+        value = {'header': 'null'}
+    return JsonResponse(value)
+
+
 
 
 
